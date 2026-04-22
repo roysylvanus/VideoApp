@@ -76,7 +76,13 @@ Displays error state with retry option.
 
 ## 🏗️ Architecture
 
-The app follows a **unidirectional data flow**:
+The app follows a **unidirectional data flow** using a ViewModel as the single source of truth. 
+
+UI events are sent to the ViewModel, which manages the Vonage session and updates state via StateFlow. 
+
+Jetpack Compose observes this state and recomposes the UI accordingly. 
+
+Lifecycle events are forwarded from the Activity to ensure proper session handling during configuration changes and backgrounding.
 
 ```
 UI (Compose)
@@ -236,6 +242,14 @@ If the call fails to connect or remains stuck in a loading state:
 * Managing lifecycle vs user intent
 * Designing robust connection state models
 * Avoiding recomposition pitfalls with AndroidView
+
+---
+
+## ⏱ Time Spent
+
+Approximately 4–6 hours across multiple sessions.
+
+While the expected time was 3–4 hours, additional time was spent refining lifecycle handling and addressing reconnection edge cases.
 
 ---
 
