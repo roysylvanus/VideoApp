@@ -9,35 +9,55 @@ A simple video calling app built using **Vonage Video SDK (OpenTok)** and **Jetp
 ### 🟢 Idle (Ready to Join)
 Initial state where the user can start a call.
 
-![Idle Screen](screenshots/idle.png)
+<p align="center">
+
+  <img src="screenshots/idle.png" width="300"/>
+
+</p>
 
 ---
 
 ### 🔄 Connecting
 Displayed while establishing a session.
 
-![Connecting Screen](screenshots/connecting.png)
+<p align="center">
+
+  <img src="screenshots/connecting.png" width="300"/>
+
+</p>
 
 ---
 
 ### 🔄 Reconnecting
 Displayed while reestablishing a session.
 
-![Reconnecting Screen](screenshots/reconnecting.png)
+<p align="center">
+
+  <img src="screenshots/reconnecting.png" width="300"/>
+
+</p>
 
 ---
 
 ### 📹 In Call
 Active video call showing publisher and subscriber with controls.
 
-![In Call Screen](screenshots/in_call.png)
+<p align="center">
+
+  <img src="screenshots/in_call.png" width="300"/>
+
+</p>
 
 ---
 
 ### ⚠️ Error / Disconnected
 Displays error state with retry option.
 
-![Error Screen](screenshots/error.png)
+<p align="center">
+
+  <img src="screenshots/error.png" width="300"/>
+
+</p>
 
 ---
 
