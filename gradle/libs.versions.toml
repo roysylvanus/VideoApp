@@ -10,6 +10,8 @@ kotlin = "2.2.10"
 composeBom = "2026.02.01"
 vonageVersion = "2.33.0"
 accompanistVersion = "0.34.0"
+coreKtxVersion = "1.7.0"
+roboelelectricVersion = "4.16.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +30,8 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 vonage-sdk-video = { group = "com.vonage", name = "client-sdk-video", version.ref = "vonageVersion"}
 google-accompanist = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistVersion"}
+core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
+roboelectic = { group = "org.robolectric", name = "robolectric", version.ref = "roboelelectricVersion"}
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
