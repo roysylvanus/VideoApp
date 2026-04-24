@@ -37,25 +37,16 @@ class VideoCallViewModel(application: Application) : AndroidViewModel(applicatio
         if (session != null) return
 
         _state.value = _state.value.copy(
-
             connectionState = ConnectionState.CONNECTING
-
         )
 
         session = Session.Builder(
-
             application,
-
             VonageVideoConfig.APP_ID,
-
             VonageVideoConfig.SESSION_ID
-
         ).build().apply {
-
             setSessionListener(sessionListener)
-
             connect(VonageVideoConfig.TOKEN)
-
         }
     }
 
@@ -159,6 +150,9 @@ class VideoCallViewModel(application: Application) : AndroidViewModel(applicatio
                 TAG,
                 "onStreamDestroyed: Publisher Stream Destroyed. Stream ID: ${stream.streamId}"
             )
+            _state.value = _state.value.copy(
+                publisher = null
+            )
         }
 
         override fun onError(publisherKit: PublisherKit, opentokError: OpentokError) {
@@ -183,13 +177,16 @@ class VideoCallViewModel(application: Application) : AndroidViewModel(applicatio
                 TAG,
                 "onDisconnected: Subscriber disconnected. Stream: ${subscriberKit.stream?.streamId}"
             )
+            _state.value = _state.value.copy(
+                subscriber = null
+            )
         }
 
         override fun onError(subscriberKit: SubscriberKit, opentokError: OpentokError) {
             Log.e(TAG, "SubscriberKit onError: ${opentokError.message}")
 
             _state.value = _state.value.copy(
-                errorMessage = "Camera/Mic error: ${opentokError.message}"
+                errorMessage = "Camera/Mic error: ${opentokError.message}",
             )
         }
     }
@@ -237,11 +234,19 @@ class VideoCallViewModel(application: Application) : AndroidViewModel(applicatio
         session = null
         isUserInitiatedDisconnect = false
 
+        _state.value = _state.value.copy(
+            publisher = null,
+            subscriber = null,
+            connectionState = ConnectionState.CONNECTING
+        )
+
         connectToSession()
     }
 
     private fun toggleAudio() {
         val newValue = !_state.value.isAudioEnabled
+
+        // mutes audio sent
         _state.value.publisher?.publishAudio = newValue
 
         _state.value = _state.value.copy(

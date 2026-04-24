@@ -18,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,9 +51,18 @@ fun VideoCallScreen(
             .background(Color.Black)
             .padding(paddingValues)
     ) {
-        uiState.subscriber?.let { SubscriberView(subscriber = it) }
 
-        uiState.publisher?.let { PublisherView(publisher = it) }
+        key(uiState.subscriber) {
+            uiState.subscriber?.let {
+                SubscriberView(subscriber = it)
+            }
+        }
+
+        key(uiState.publisher) {
+            uiState.publisher?.let {
+                PublisherView(publisher = it)
+            }
+        }
 
         VideoCallOverlay(
             uiState = uiState,
@@ -78,6 +88,9 @@ private fun BoxScope.PublisherView(publisher: Publisher) {
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
             }
+        },
+        update = {
+            (publisher.view.parent as? ViewGroup)?.removeView(publisher.view)
         }
     )
 }
@@ -98,6 +111,9 @@ private fun SubscriberView(
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
             }
+        },
+        update = {
+            (subscriber.view.parent as? ViewGroup)?.removeView(subscriber.view)
         }
     )
 }
